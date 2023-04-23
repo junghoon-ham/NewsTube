@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/news_nav_graph"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.idealkr.newstube.presentation.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_watch"
+            app:destination="@id/fragment_watch"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_video_list"
+        android:name="com.idealkr.newstube.presentation.home.video_list.VideoListFragment"
+        tools:layout="@layout/fragment_video_list" />
+
+    <fragment
+        android:id="@+id/fragment_live"
+        android:name="com.idealkr.newstube.presentation.live.LiveFragment"
+        android:label="@string/live"
+        tools:layout="@layout/fragment_live"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_bookmark"
+        android:name="com.idealkr.newstube.presentation.bookmark.BookmarkFragment"
+        android:label="@string/bookmark"
+        tools:layout="@layout/fragment_bookmark">
+
+        <action
+            android:id="@+id/action_fragment_bookmark_to_fragment_watch"
+            app:destination="@id/fragment_watch"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="com.idealkr.newstube.presentation.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_fragment_search_to_fragment_watch"
+            app:destination="@id/fragment_watch"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_watch"
+        android:name="com.idealkr.newstube.presentation.watch.WatchFragment"
+        android:label="@string/watch"
+        tools:layout="@layout/fragment_watch">
+
+        <argument
+            android:name="video"
+            app:argType="com.idealkr.newstube.domain.model.VideoInfo" />
+    </fragment>
+</navigation>

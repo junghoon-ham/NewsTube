@@ -1,0 +1,1 @@
+C:\projects\NewsTube\buildSrc\build\classes\kotlin\main\DefaultConfig.class;C:\projects\NewsTube\buildSrc\build\classes\kotlin\main\Dependencies.class;C:\projects\NewsTube\buildSrc\build\classes\kotlin\main\Plugins.class;C:\projects\NewsTube\buildSrc\build\classes\kotlin\main\Testing.class;C:\projects\NewsTube\buildSrc\build\classes\kotlin\main\Versions.class

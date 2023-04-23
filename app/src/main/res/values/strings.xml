@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NewsTube</string>
+
+    <string name="home">홈</string>
+    <string name="live">라이브</string>
+    <string name="bookmark">북마크</string>
+    <string name="search">검색</string>
+    <string name="watch">시청</string>
+
+    <string name="input_search">검색어를 입력해 주세요.</string>
+    <string name="no_result">검색 결과가 없습니다.</string>
+    <string name="insert_bookmark">북마크에 저장되었습니다.</string>
+    <string name="delete_bookmark">북마크에서 삭제되었습니다.</string>
+    <string name="no_bookmark">추가된 북마크가 없습니다.</string>
+</resources>
