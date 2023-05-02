@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.idealkr.newstube.databinding.FragmentSearchBinding
 import com.idealkr.newstube.domain.model.VideoInfo
 import com.idealkr.newstube.presentation.BaseFragment
+import com.idealkr.newstube.presentation.search.filter.FilterDialog
 import com.idealkr.newstube.util.Constants.DUMMY_LIST
 import com.idealkr.newstube.util.collectLatestStateFlow
 import com.idealkr.newstube.util.showSnackBar
@@ -27,9 +28,10 @@ class SearchFragment : BaseFragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private val searchViewModel by viewModels<SearchViewModel>()
+    private val searchViewModel by activityViewModels<SearchViewModel>()
 
     private lateinit var searchAdapter: SearchPagingAdapter
+    private lateinit var filterAdapter: FilterAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,16 +49,31 @@ class SearchFragment : BaseFragment() {
         setupRecyclerView()
         setupSearch()
         setupLoadState()
+        setupClickListener()
     }
 
     private fun initObserve() {
         collectLatestStateFlow(searchViewModel.getPagingResult) {
             searchAdapter.submitData(it)
         }
+
+        collectLatestStateFlow(searchViewModel.filterChannels) {
+            searchViewModel.getVideoList("아아", 1)
+            filterAdapter.setData(it)
+            binding.constraintLayoutFilter.isVisible = it.isNotEmpty()
+        }
+    }
+
+    private fun setupClickListener() {
+        binding.buttonFilter.setOnClickListener {
+            val dialog = FilterDialog()
+            dialog.show(requireActivity().supportFragmentManager, "")
+        }
     }
 
     private fun setupRecyclerView() {
         searchAdapter = SearchPagingAdapter()
+        filterAdapter = FilterAdapter(requireContext())
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
@@ -75,6 +92,12 @@ class SearchFragment : BaseFragment() {
                 )
                 findNavController().navigate(action)
             }
+        }
+
+        binding.recyclerViewFilter.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = filterAdapter
         }
     }
 

@@ -8,7 +8,7 @@ object Versions {
     // Androidx
     const val CORE_KTX = "1.7.0"
     const val APP_COMPAT = "1.4.1"
-    const val MATERIAL = "1.6.1"
+    const val MATERIAL = "1.8.0"
     const val CONSTRAINT_LAYOUT = "2.1.3"
 
     // Testing
@@ -35,5 +35,6 @@ object Versions {
     const val YOUTUBE_PLAYER = "12.0.0"
     const val ROOM = "2.5.1"
     const val KOTLIN_SERIALIZATION = "1.3.2"
+    const val FLEX_BOX = "3.0.0"
     const val SPLASH = "1.0.0"
 }

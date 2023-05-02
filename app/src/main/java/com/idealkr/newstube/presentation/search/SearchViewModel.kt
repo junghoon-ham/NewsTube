@@ -21,6 +21,12 @@ class SearchViewModel @Inject constructor(
     private val _getPagingResult = MutableStateFlow<PagingData<Documents>>(PagingData.empty())
     val getPagingResult: StateFlow<PagingData<Documents>> = _getPagingResult.asStateFlow()
 
+    private val _filterChannels = MutableStateFlow<ArrayList<String>>(arrayListOf())
+    val filterChannels: StateFlow<ArrayList<String>> = _filterChannels
+
+    private val _selectChannels = MutableStateFlow<ArrayList<String>>(arrayListOf())
+    val selectChannels: StateFlow<ArrayList<String>> = _selectChannels
+
     fun getVideoList(
         query: String,
         page: Int
@@ -31,4 +37,46 @@ class SearchViewModel @Inject constructor(
                 _getPagingResult.value = it
             }
     }
+
+    fun addChannel(channel: String) {
+        val channels = ArrayList(_selectChannels.value)
+        channels.add(channel)
+
+        _selectChannels.value = channels
+    }
+
+    fun removeChannel(channel: String) {
+        val channels = ArrayList(_selectChannels.value)
+        channels.remove(channel)
+
+        _selectChannels.value = channels
+    }
+
+    suspend fun removeAllChannel() {
+        val channels = ArrayList(_selectChannels.value)
+        channels.clear()
+
+        _selectChannels.emit(channels)
+        _filterChannels.emit(selectChannels.value)
+    }
+
+    suspend fun setFilter() {
+        val channels = ArrayList(_selectChannels.value)
+        _filterChannels.emit(channels)
+    }
+
+    val channelList = listOf(
+        "YTN",
+        "JTBC",
+        "채널A",
+        "연합뉴스",
+        "MBN",
+        "SBS",
+        "KBS",
+        "MBC",
+        "TV조선",
+        "비디오머그",
+        "스브스",
+        "엠빅뉴스"
+    )
 }

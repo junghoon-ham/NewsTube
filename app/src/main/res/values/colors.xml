@@ -9,7 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="color_ededed">#EDEDED</color>
+    <color name="color_f6f6f6">#F6F6F6</color>
     <color name="color_444444">#444444</color>
     <color name="color_8c8c8c">#8C8C8C</color>
     <color name="color_7ba5d5">#7BA5D5</color>
+    <color name="color_5e8cc9">#5E8CC9</color>
 </resources>

@@ -20,6 +20,8 @@ object Dependencies {
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
     const val LIFECYCLE_RUNTIME_KTX =
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LIFECYCLE}"
+    const val LIFECYCLE_SAVEDSTATE =
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.LIFECYCLE}"
 
     const val COROUTINE_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINE}"
     const val COROUTINE_ANDROID =
@@ -62,6 +64,8 @@ object Dependencies {
 
     const val SERIALIZATION =
         "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLIN_SERIALIZATION}"
+
+    const val FLEX_BOX = "com.google.android.flexbox:flexbox:${Versions.FLEX_BOX}"
 
     const val SPLASH = "androidx.core:core-splashscreen:${Versions.SPLASH}"
 }

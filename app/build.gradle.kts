@@ -78,6 +78,7 @@ dependencies {
     // Lifecycle
     implementation(Dependencies.LIFECYCLE_VIEWMODEL_KTX)
     implementation(Dependencies.LIFECYCLE_RUNTIME_KTX)
+    implementation(Dependencies.LIFECYCLE_SAVEDSTATE)
 
     // Coroutine
     implementation(Dependencies.COROUTINE_CORE)
@@ -121,4 +122,7 @@ dependencies {
 
     // Kotlin Serialization
     implementation(Dependencies.SERIALIZATION)
+
+    // Flex box
+    implementation(Dependencies.FLEX_BOX)
 }
