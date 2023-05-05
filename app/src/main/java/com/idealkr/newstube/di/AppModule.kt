@@ -1,12 +1,17 @@
 package com.idealkr.newstube.di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.idealkr.newstube.data.api.NewsApi
 import com.idealkr.newstube.data.db.VideoDatabase
 import com.idealkr.newstube.domain.repository.VideoRepository
 import com.idealkr.newstube.domain.use_case.*
 import com.idealkr.newstube.util.Constants.BASE_URL
+import com.idealkr.newstube.util.Constants.DATASTORE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -68,7 +73,17 @@ class AppModule {
             getBookmarks = GetBookmarks(repository),
             getBookmark = GetBookmark(repository),
             insertBookmark = InsertBookmark(repository),
-            deleteBookmark = DeleteBookmark(repository)
+            deleteBookmark = DeleteBookmark(repository),
+            saveSortMode = SaveSortMode(repository),
+            getSortMode = GetSortMode(repository)
         )
     }
+
+    // DataStore
+    @Singleton
+    @Provides
+    fun providePreferencesDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(
+            produceFile = { context.preferencesDataStoreFile(DATASTORE_NAME) }
+        )
 }

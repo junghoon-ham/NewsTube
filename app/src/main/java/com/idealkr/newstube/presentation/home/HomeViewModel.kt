@@ -15,6 +15,7 @@ class HomeViewModel @Inject constructor(
     private val _channelList = MutableStateFlow<List<String>>(emptyList())
     val channelList: StateFlow<List<String>> = _channelList.asStateFlow()
 
+    // TODO: 임시
     fun getChannelList() {
         val list = listOf(
             "YTN",

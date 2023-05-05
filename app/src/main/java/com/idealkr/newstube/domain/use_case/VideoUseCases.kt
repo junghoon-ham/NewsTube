@@ -5,5 +5,7 @@ data class VideoUseCases(
     val getBookmarks: GetBookmarks,
     val getBookmark: GetBookmark,
     val insertBookmark: InsertBookmark,
-    val deleteBookmark: DeleteBookmark
+    val deleteBookmark: DeleteBookmark,
+    val saveSortMode: SaveSortMode,
+    val getSortMode: GetSortMode
 )

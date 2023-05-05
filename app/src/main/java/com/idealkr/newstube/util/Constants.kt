@@ -6,6 +6,9 @@ object Constants {
     const val BASE_URL = "https://dapi.kakao.com/"
     const val API_KEY = BuildConfig.newsApiKey
     const val PAGING_SIZE = 15
+    const val DATASTORE_NAME = "preferences_datastore"
+
+    // TODO: 임시
     val DUMMY_LIST = listOf<String>(
         "MZVpxUd4z_U",
         "0WwGQrQ-YwI",

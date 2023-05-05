@@ -21,4 +21,9 @@ interface VideoRepository {
     fun getBookmarkVideo(videoId: String): Flow<VideoInfo>
 
     fun getBookmarkPagingVideos(): Flow<PagingData<VideoInfo>>
+
+    // DataStore
+    suspend fun saveSortMode(mode: String)
+
+    suspend fun getSortMode(): Flow<String>
 }

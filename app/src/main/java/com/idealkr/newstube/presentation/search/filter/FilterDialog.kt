@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -13,8 +14,10 @@ import com.google.android.material.chip.Chip
 import com.idealkr.newstube.R
 import com.idealkr.newstube.databinding.FragmentFilterBinding
 import com.idealkr.newstube.presentation.search.SearchViewModel
+import com.idealkr.newstube.util.Sort
 import com.idealkr.newstube.util.collectLatestStateFlow
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
@@ -56,8 +59,21 @@ class FilterDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bindChannels()
+        initLoad()
         initObserve()
-        setupListener()
+        setupClickListener()
+        setupSortListener()
+    }
+
+    private fun initLoad() {
+        lifecycleScope.launch {
+            val buttonId = when (searchViewModel.getSortMode()) {
+                Sort.ACCURACY.value -> R.id.button_recently
+                Sort.LATEST.value -> R.id.button_old
+                else -> return@launch
+            }
+            binding.toggleButton.check(buttonId)
+        }
     }
 
     private fun initObserve() {
@@ -72,7 +88,7 @@ class FilterDialog : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setupListener() {
+    private fun setupClickListener() {
         with(binding) {
             buttonClose.setOnClickListener {
                 dismiss()
@@ -88,6 +104,19 @@ class FilterDialog : BottomSheetDialogFragment() {
                 }
 
                 dismiss()
+            }
+        }
+    }
+
+    private fun setupSortListener() {
+        with(binding) {
+            toggleButton.addOnButtonCheckedListener { group, checkedId, isChecked ->
+                if (isChecked) {
+                    when (checkedId) {
+                        R.id.button_recently -> searchViewModel.saveSortMode(Sort.ACCURACY.value)
+                        R.id.button_old -> searchViewModel.saveSortMode(Sort.LATEST.value)
+                    }
+                }
             }
         }
     }
@@ -120,7 +149,7 @@ class FilterDialog : BottomSheetDialogFragment() {
             runBlocking {
                 searchViewModel.removeAllChannel()
             }
-            
+
             for (i in 0 until flexboxLayout.childCount) {
                 val childView: View = flexboxLayout.getChildAt(i)
                 if (childView is Chip) childView.isChecked = false

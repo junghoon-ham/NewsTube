@@ -7,10 +7,13 @@ import androidx.paging.cachedIn
 import com.idealkr.newstube.domain.model.Documents
 import com.idealkr.newstube.domain.use_case.VideoUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +34,7 @@ class SearchViewModel @Inject constructor(
         query: String,
         page: Int
     ) = viewModelScope.launch {
-        videoUseCases.getVideos(query, "recency", page)
+        videoUseCases.getVideos(query, getSortMode(), page)
             .cachedIn(viewModelScope)
             .collect {
                 _getPagingResult.value = it
@@ -65,6 +68,16 @@ class SearchViewModel @Inject constructor(
         _filterChannels.emit(channels)
     }
 
+    // DataStore
+    fun saveSortMode(value: String) = viewModelScope.launch(Dispatchers.IO) {
+        videoUseCases.saveSortMode(value)
+    }
+
+    suspend fun getSortMode() = withContext(Dispatchers.IO) {
+        videoUseCases.getSortMode().first()
+    }
+
+    // TODO: 임시
     val channelList = listOf(
         "YTN",
         "JTBC",
