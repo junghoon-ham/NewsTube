@@ -189,6 +189,7 @@ class WatchFragment : BaseFragment() {
 
     override fun onDestroyView() {
         binding.youtubePlayerView.release()
+        onBackPressedCallback.remove()
 
         _binding = null
         super.onDestroyView()
