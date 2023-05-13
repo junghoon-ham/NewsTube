@@ -55,9 +55,22 @@ dependencies {
     implementation(Dependencies.APP_COMPAT)
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAINT_LAYOUT)
+
+    // Testing
     testImplementation(Testing.JUNIT4)
+    //testImplementation("androidx.test.ext:truth:1.4.0")
+    //testImplementation("androidx.test.runner:1.4.0")
+    testImplementation("androidx.test.ext:truth:1.5.0")
+    testImplementation("androidx.test:runner:1.5.1")
+    testImplementation("org.robolectric:robolectric:4.8.1")
+    testImplementation("androidx.test.ext:junit:1.1.4")
+    testImplementation("androidx.test:core:1.5.0")
+
     androidTestImplementation(Testing.ANDROID_JUNIT)
     androidTestImplementation(Testing.ESPRESSO_CORE)
+    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("androidx.test.ext:truth:1.5.0")
+    androidTestImplementation("androidx.test.runner:1.5.1")
 
     // Navigation
     implementation(Dependencies.NAVIGATION_FRAGMENT_KTX)
